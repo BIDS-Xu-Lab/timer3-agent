@@ -8,3 +8,11 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Cached / generated data
+data/raw/
+data/lookup.npz
+data/local_*.parquet
+data/diff_*.parquet
+data/scraped/
+
