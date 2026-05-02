@@ -15,4 +15,6 @@ data/lookup.npz
 data/local_*.parquet
 data/diff_*.parquet
 data/scraped/
+data/benchmark.parquet
+.claude/scheduled_tasks.lock
 

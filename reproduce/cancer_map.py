@@ -63,7 +63,15 @@ def build_sample_labels(
     are kept (this is what TIMER3 actually has data for).
     """
     pheno = pd.read_csv(phenotype_tsv, sep="\t")
-    pheno = pheno[pheno["sample_type"] == "Primary Tumor"].copy()
+    # Most TIMER3 cancer cohorts are Primary Tumor only. SKCM is the
+    # exception: roughly 4/5 of TIMER3's SKCM samples are metastatic.
+    keep_primary = pheno["sample_type"] == "Primary Tumor"
+    pheno_primary = pheno[keep_primary].copy()
+    pheno_skcm_met = pheno[
+        (pheno["sample_type"] == "Metastatic")
+        & (pheno["_primary_disease"].str.lower() == "skin cutaneous melanoma")
+    ].copy()
+    pheno = pd.concat([pheno_primary, pheno_skcm_met], ignore_index=True)
     pheno["disease_lower"] = pheno["_primary_disease"].str.lower()
     pheno["code"] = pheno["disease_lower"].map(DISEASE_TO_CODE)
 
