@@ -17,4 +17,6 @@ data/diff_*.parquet
 data/scraped/
 data/benchmark.parquet
 .claude/scheduled_tasks.lock
+genelist/hgnc_protein_coding.tsv
+genelist/hgnc_all.tsv
 
